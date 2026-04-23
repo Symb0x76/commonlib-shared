@@ -117,6 +117,8 @@ if(MSVC)
     target_compile_options(commonlib-shared
         PRIVATE
             /utf-8
+            /fp:contract
+            /fp:except-
         PUBLIC
             /EHsc
             /permissive-
@@ -124,8 +126,6 @@ if(MSVC)
             /cgthreads8
             /diagnostics:caret
             /external:W0
-            /fp:contract
-            /fp:except-
             /guard:cf-
             /wd4200
             /wd4201
