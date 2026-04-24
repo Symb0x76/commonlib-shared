@@ -95,7 +95,10 @@ target_precompile_headers(commonlib-shared
     PRIVATE
         "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/src/REX/PCH.h>")
 
-target_compile_definitions(commonlib-shared PUBLIC SPDLOG_USE_STD_FORMAT)
+# Do not force SPDLOG_USE_STD_FORMAT here: vcpkg's spdlog::spdlog target is built
+# with its default fmt-based ABI. Propagating SPDLOG_USE_STD_FORMAT makes consumers
+# emit references to std::format/string_view spdlog symbols that are not present in
+# the linked spdlog.lib.
 
 if(COMMONLIBF4_ENABLE_INI)
     target_compile_definitions(commonlib-shared PUBLIC COMMONLIB_OPTION_INI=1)
